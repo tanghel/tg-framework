@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using TgFramework.Core;
 
-namespace Traian.Framework.Wpf.Controls
+namespace TgFramework.Controls
 {
     public class WrapGrid : Grid
     {

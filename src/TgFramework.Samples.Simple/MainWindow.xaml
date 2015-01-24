@@ -1,0 +1,40 @@
+﻿<Window x:Class="TgFramework.Samples.Simple.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:tg="http://tgframework/"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <tg:PropertyContainer x:Name="propertyContainer" DataContext="{Binding EditValue}">
+            <!--<tg:PropertyContainer.LayoutManager>
+                <tg:GroupBoxLayoutManager Header="Customer" />
+            </tg:PropertyContainer.LayoutManager>-->
+            <tg:PropertyContainer.Fields>
+                <tg:EditField Title="First Name:" Binding="{Binding FirstName}">
+                    <!--<tg:EditField.EditSettings>
+                        <tg:TextEditSettings />
+                    </tg:EditField.EditSettings>-->
+                </tg:EditField>
+                <tg:EditField Title="Last Name:" FieldName="LastName">
+                    <tg:EditField.EditSettings>
+                        <tg:TextEditSettings />
+                    </tg:EditField.EditSettings>
+                </tg:EditField>
+                <tg:EditField Title="Address:" FieldName="Address">
+                    <tg:EditField.EditSettings>
+                        <tg:TextEditSettings />
+                    </tg:EditField.EditSettings>
+                </tg:EditField>
+                <tg:EditField Title="Gender:" FieldName="Gender">
+                    <tg:EditField.EditSettings>
+                        <tg:PickerEditSettings>
+                            <tg:PickerEditSettings.Items>
+                                <tg:PickerItem Id="Male" Title="Male" />
+                                <tg:PickerItem Id="Female" Title="Female" />
+                            </tg:PickerEditSettings.Items>
+                        </tg:PickerEditSettings>
+                    </tg:EditField.EditSettings>
+                </tg:EditField>
+            </tg:PropertyContainer.Fields>
+        </tg:PropertyContainer>
+    </Grid>
+</Window>

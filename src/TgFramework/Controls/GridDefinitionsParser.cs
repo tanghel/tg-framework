@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using TgFramework.Core;
 using TgFramework.Exceptions;
 
-namespace Traian.Framework.Wpf.Controls
+namespace TgFramework.Controls
 {
     public static class GridDefinitionExtensions
     {

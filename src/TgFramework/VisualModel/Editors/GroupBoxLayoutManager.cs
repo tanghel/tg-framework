@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using TgFramework.Core;
-using Traian.Framework.Wpf.Controls;
+using TgFramework.Controls;
 
 namespace TgFramework.VisualModel.Editors
 {

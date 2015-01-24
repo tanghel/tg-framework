@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/TgFramework.Samples.Simple/obj/Debug
+/src/TgFramework.Samples.Simple/bin/Debug
+/src/TgFramework.Core/obj/Debug
+/src/TgFramework.Core/bin/Debug
+/src/TgFramework/bin/Debug
+/src/TgFramework/obj/Debug
+/src/packages
+*.suo

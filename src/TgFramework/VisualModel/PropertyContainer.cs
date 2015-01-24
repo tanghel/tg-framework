@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using Traian.Framework.Wpf.Controls;
+using TgFramework.Controls;
 
 namespace TgFramework.VisualModel
 {
