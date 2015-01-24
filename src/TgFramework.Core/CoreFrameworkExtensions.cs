@@ -10,6 +10,46 @@ namespace TgFramework.Core
 {
     public static class CoreFrameworkExtensions
     {
+        /// <summary>
+        /// Returns the formatted string for the given value and arguments.
+        /// </summary>
+        /// <param name="value">The string value to format.</param>
+        /// <param name="arguments">The arguments used for formatting.</param>
+        /// <returns></returns>
+        public static string FormatString(this string value, params object[] arguments)
+        {
+            if (value == null) throw new ArgumentNullException("value");
+
+            return string.Format(value, arguments);
+        }
+
+        /// <summary>
+        /// Invokes the provided event handler using the given event sender and arguments.
+        /// </summary>
+        /// <param name="eventHandler">The event handler.</param>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="args">The event arguments.</param>
+        public static void Invoke(this EventHandler eventHandler, object sender, EventArgs args)
+        {
+            var handler = eventHandler;
+            if (handler != null)
+                handler.Invoke(sender, args);
+        }
+
+        /// <summary>
+        /// Invokes the provided event handler using the given event sender and arguments.
+        /// </summary>
+        /// <typeparam name="TArgs">The type of the arguments.</typeparam>
+        /// <param name="eventHandler">The event handler.</param>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="args">The event arguments.</param>
+        public static void Invoke<TArgs>(this EventHandler<TArgs> eventHandler, object sender, TArgs args) where TArgs : EventArgs
+        {
+            var handler = eventHandler;
+            if (handler != null)
+                handler.Invoke(sender, args);
+        }
+        
         private static string GetHashValue(this string value, HashAlgorithm algorithm)
         {
             var data = Encoding.UTF8.GetBytes(value);
