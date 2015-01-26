@@ -18,10 +18,7 @@ namespace TgFramework.Core
         /// <returns></returns>
         public static string FormatString(this string value, params object[] arguments)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException("value");
-            }
+            if (value == null) throw new ArgumentNullException("value");
 
             return string.Format(value, arguments);
         }
