@@ -5,12 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using TgFramework.Core;
 
 namespace TgFramework.VisualModel
 {
-    public class EditSettingsBase
+    public class EditSettingsBase : DependencyObject
     {
+        #region Private Members
+
         private IEditorFactory _factory;
+
+        private EditField _editField;
+
+        #endregion
+
+        #region Events
+
+        public event EventHandler EditFieldChanged;
+
+        #endregion
+
+        #region Properties
 
         private IEditorFactory Factory
         {
@@ -18,19 +33,29 @@ namespace TgFramework.VisualModel
             {
                 if (_factory == null)
                 {
-                    _factory = EditorFactory.Instance.GetEditor(this);
+                    _factory = EditorFactory.Instance.GetEditorFactory(this);
                 }
 
                 return _factory;
             }
         }
 
-        public EditField EditField { get; set; }
-
-        public EditSettingsBase()
+        public EditField EditField
         {
-
+            get
+            {
+                return _editField;
+            }
+            set
+            {
+                _editField = value;
+                CoreFrameworkExtensions.Invoke(this.EditFieldChanged, this, EventArgs.Empty);
+            }
         }
+
+        #endregion
+
+        #region Methods
 
         public void AttachBinding(UIElement element, Binding binding)
         {
@@ -51,5 +76,7 @@ namespace TgFramework.VisualModel
         {
             return Factory.CreateElement(this);
         }
+
+        #endregion
     }
 }

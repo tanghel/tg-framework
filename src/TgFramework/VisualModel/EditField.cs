@@ -10,7 +10,7 @@ using TgFramework.Data;
 
 namespace TgFramework.VisualModel
 {
-    public class EditField
+    public class EditField : DependencyObject
     {
         #region Private Members
 
@@ -29,6 +29,15 @@ namespace TgFramework.VisualModel
         public event ValidatingEventHandler Validating;
 
         public event ValueChangedEventHandler ValueChanged;
+
+        public event EventHandler EditSettingsChanged;
+
+        #endregion
+
+        #region Dependency Properties
+
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register("Title", typeof(string), typeof(EditField), new PropertyMetadata(null));
 
         #endregion
 
@@ -71,6 +80,14 @@ namespace TgFramework.VisualModel
         {
             get
             {
+                if (_Editor == null)
+                {
+                    if (_EditSettings != null)
+                    {
+                        _Editor = _EditSettings.CreateElement();
+                    }
+                }
+
                 return _Editor;
             }
             private set
@@ -80,7 +97,11 @@ namespace TgFramework.VisualModel
             }
         }
 
-        public string Title { get; set; }
+        public string Title
+        {
+            get { return (string)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
 
         public EditSettingsBase EditSettings
         {
@@ -88,7 +109,7 @@ namespace TgFramework.VisualModel
             {
                 if (_EditSettings == null)
                 {
-                    EditSettings = new EditSettingsBase();
+                    EditSettings = EditorFactory.Instance.CreateDefaultEditSettings();
                 }
 
                 return _EditSettings;
@@ -101,6 +122,8 @@ namespace TgFramework.VisualModel
                     _EditSettings.EditField = this;
                     RefreshEditor();
                 }
+
+                CoreFrameworkExtensions.Invoke(this.EditSettingsChanged, this, EventArgs.Empty);
             }
         }
 
@@ -150,6 +173,35 @@ namespace TgFramework.VisualModel
                 this.Editor.SetValidatingAction(ValidatingHandler);
                 this.Editor.SetValueChangedAction(ValueChangedHandler);
             }
+        }
+
+        #endregion
+    }
+
+    public class EditField<T> : EditField
+        where T : EditSettingsBase, new()
+    {
+        #region Properties
+
+        public new T EditSettings
+        {
+            get
+            {
+                return base.EditSettings as T;
+            }
+            set
+            {
+                base.EditSettings = value;
+            }
+        }
+
+        #endregion
+
+        #region Constructors
+
+        public EditField()
+        {
+            this.EditSettings = new T();
         }
 
         #endregion

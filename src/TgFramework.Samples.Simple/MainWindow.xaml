@@ -4,36 +4,21 @@
         xmlns:tg="http://tgframework/"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <tg:PropertyContainer x:Name="propertyContainer" DataContext="{Binding EditValue}">
-            <!--<tg:PropertyContainer.LayoutManager>
-                <tg:GroupBoxLayoutManager Header="Customer" />
-            </tg:PropertyContainer.LayoutManager>-->
+        <tg:PropertyContainer x:Name="propertyContainer" Header="Customer" DataContext="{Binding EditValue}">
+            <tg:PropertyContainer.LayoutSettings>
+                <tg:GroupBoxLayoutSettings />
+            </tg:PropertyContainer.LayoutSettings>
             <tg:PropertyContainer.Fields>
-                <tg:EditField Title="First Name:" Binding="{Binding FirstName}">
-                    <!--<tg:EditField.EditSettings>
-                        <tg:TextEditSettings />
-                    </tg:EditField.EditSettings>-->
-                </tg:EditField>
-                <tg:EditField Title="Last Name:" FieldName="LastName">
-                    <tg:EditField.EditSettings>
-                        <tg:TextEditSettings />
-                    </tg:EditField.EditSettings>
-                </tg:EditField>
-                <tg:EditField Title="Address:" FieldName="Address">
-                    <tg:EditField.EditSettings>
-                        <tg:TextEditSettings />
-                    </tg:EditField.EditSettings>
-                </tg:EditField>
-                <tg:EditField Title="Gender:" FieldName="Gender">
-                    <tg:EditField.EditSettings>
-                        <tg:PickerEditSettings>
-                            <tg:PickerEditSettings.Items>
-                                <tg:PickerItem Id="Male" Title="Male" />
-                                <tg:PickerItem Id="Female" Title="Female" />
-                            </tg:PickerEditSettings.Items>
-                        </tg:PickerEditSettings>
-                    </tg:EditField.EditSettings>
-                </tg:EditField>
+                <tg:EditField Title="First Name:" Binding="{Binding FirstName}" />
+                <tg:TextField Title="Last Name:" FieldName="LastName" />
+                <tg:TextField Title="Address:" FieldName="Address" />
+                <tg:PickerField Title="Gender:" FieldName="Gender">
+                    <tg:PickerField.Items>
+                        <tg:PickerItem Id="Male" Title="Male" />
+                        <tg:PickerItem Id="Female" Title="Female" />
+                    </tg:PickerField.Items>
+                </tg:PickerField>
+                <tg:ButtonField Title="test" Content="Hello world!" />
             </tg:PropertyContainer.Fields>
         </tg:PropertyContainer>
     </Grid>

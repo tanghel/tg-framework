@@ -18,37 +18,48 @@ namespace TgFramework.VisualModel
     {
         #region Private Members
 
-        private LayoutManager _layoutManager;
-
         private ObservableCollection<EditField> _fields;
+
+        private LayoutSettingsBase _layoutSettings;
+
+        #endregion
+
+        #region Dependency Properties
+
+        public static readonly DependencyProperty HeaderProperty =
+            DependencyProperty.Register("Header", typeof(string), typeof(PropertyContainer), new PropertyMetadata(null));
 
         #endregion
 
         #region Properties
 
-        public LayoutManager LayoutManager
+        public LayoutSettingsBase LayoutSettings
         {
             get
             {
-                if (_layoutManager == null)
+                if (_layoutSettings == null)
                 {
-                    LayoutManager = EditorFactory.Instance.CreateDefaultLayoutManager();
+                    _layoutSettings = EditorFactory.Instance.CreateDefaultLayoutSettings();
+                    _layoutSettings.PropertyContainer = this;
+
+                    CreateLayout();
                 }
 
-                return _layoutManager;
+                return _layoutSettings;
             }
             set
             {
-                _layoutManager = value;
-                if (_layoutManager != null)
-                {
-                    _layoutManager.PropertyContainer = this;
-                }
+                _layoutSettings = value;
+                _layoutSettings.PropertyContainer = this;
+
                 CreateLayout();
-                RefreshLayout();
+
+                if (IsLoaded)
+                {
+                    RefreshLayout();
+                }
             }
         }
-
 
         public ObservableCollection<EditField> Fields
         {
@@ -72,23 +83,29 @@ namespace TgFramework.VisualModel
             }
         }
 
+        public string Header
+        {
+            get { return (string)GetValue(HeaderProperty); }
+            set { SetValue(HeaderProperty, value); }
+        }
+
         #endregion
 
         #region Private Methods
 
         private void CreateLayout()
         {
-            if (LayoutManager != null)
+            if (LayoutSettings != null)
             {
-                this.Content = LayoutManager.CreateLayout();
+                this.Content = LayoutSettings.CreateLayout();
             }
         }
 
         private void RefreshLayout()
         {
-            if (LayoutManager != null)
+            if (LayoutSettings != null)
             {
-                LayoutManager.RefreshLayout();
+                LayoutSettings.RefreshLayout(this.Fields.ToArray());
             }
         }
 
