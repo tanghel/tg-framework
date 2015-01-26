@@ -23,6 +23,7 @@ namespace TgFramework.Core
                 throw new ArgumentNullException("value");
             }
 
+            // Another test comment
             return string.Format(value, arguments);
         }
 
