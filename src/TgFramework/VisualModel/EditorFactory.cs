@@ -33,10 +33,9 @@ namespace TgFramework.VisualModel
                 {
                     _Instance = new EditorFactory();
 
-                    _Instance.RegisterDefaultEditSettings<TextEditSettings>();
-                    _Instance.RegisterEditor<TextEditSettings, TextBoxFactory>();
-                    _Instance.RegisterEditor<PickerEditSettings, PickerFactory>();
-                    _Instance.RegisterEditor<ButtonSettings, ButtonFactory>();
+                    _Instance.RegisterEditor<TextField, TextBoxFactory>();
+                    _Instance.RegisterEditor<PickerField, PickerFactory>();
+                    _Instance.RegisterEditor<ButtonField, ButtonFactory>();
 
                     _Instance.RegisterDefaultLayoutSettings<GroupBoxLayoutSettings>();
                     _Instance.RegisterLayout<StackPanelLayoutSettings, StackPanelLayoutFactory>();
@@ -57,10 +56,10 @@ namespace TgFramework.VisualModel
             container.Register<LayoutSettingsBase, T>();
         }
 
-        public void RegisterDefaultEditSettings<T>()
-            where T : EditSettingsBase
+        public void RegisterDefaultEditField<T>()
+            where T : EditFieldBase
         {
-            container.Register<EditSettingsBase, T>();
+            container.Register<EditFieldBase, T>();
         }
 
         public LayoutSettingsBase CreateDefaultLayoutSettings()
@@ -68,13 +67,13 @@ namespace TgFramework.VisualModel
             return container.GetInstance<LayoutSettingsBase>();
         }
 
-        public EditSettingsBase CreateDefaultEditSettings()
+        public EditFieldBase CreateDefaultEditField()
         {
-            return container.GetInstance<EditSettingsBase>();
+            return container.GetInstance<EditFieldBase>();
         }
 
         public void RegisterEditor<TService, TImplementation>()
-            where TService : EditSettingsBase
+            where TService : EditFieldBase
             where TImplementation : class, IEditorFactory<TService>
         {
             container.Register<IEditorFactory<TService>, TImplementation>();
@@ -87,19 +86,19 @@ namespace TgFramework.VisualModel
             container.Register<ILayoutFactory<TService>, TImplementation>();
         }
 
-        internal IEditorFactory GetEditorFactory(EditSettingsBase settings)
+        internal IEditorFactory GetEditorFactory(EditFieldBase field)
         {
-            if (settings == null)
+            if (field == null)
             {
-                throw new ArgumentNullException("settings");
+                throw new ArgumentNullException("field");
             }
 
-            var type = typeof(IEditorFactory<>).MakeGenericType(settings.GetType());
+            var type = typeof(IEditorFactory<>).MakeGenericType(field.GetType());
             var factory = container.GetInstance(type) as IEditorFactory;
 
             if (factory == null)
             {
-                throw new InvalidOperationException("Could not create IEditorFactory of type " + settings.GetType().ToString());
+                throw new InvalidOperationException("Could not create IEditorFactory of type " + field.GetType().ToString());
             }
 
             return factory;

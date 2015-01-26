@@ -11,7 +11,7 @@ namespace TgFramework.VisualModel
     {
         UIElement CreateLayout(LayoutSettingsBase settings);
 
-        void RefreshLayout(EditField[] fields);
+        void RefreshLayout(EditFieldBase[] fields);
     }
 
     public interface ILayoutFactory<T> : ILayoutFactory

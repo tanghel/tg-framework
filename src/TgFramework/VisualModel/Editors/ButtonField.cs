@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace TgFramework.VisualModel.Editors
 {
-    public class ButtonField : EditField<ButtonSettings>
+    public class ButtonField : EditFieldBase
     {
         #region Dependency Properties
 
@@ -23,23 +23,6 @@ namespace TgFramework.VisualModel.Editors
         {
             get { return (object)GetValue(ContentProperty); }
             set { SetValue(ContentProperty, value); }
-        }
-
-        #endregion
-
-        #region Constructors
-
-        public ButtonField()
-        {
-            this.EditSettingsChanged += (sender, args) =>
-                {
-                    var binding = new Binding("Content")
-                    {
-                        Source = EditSettings
-                    };
-
-                    BindingOperations.SetBinding(this, ContentProperty, binding);
-                };
         }
 
         #endregion

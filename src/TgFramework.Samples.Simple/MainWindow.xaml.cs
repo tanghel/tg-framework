@@ -27,7 +27,7 @@ namespace TgFramework.Samples.Simple
     }
 
 
-    public class LabelTextEditFactory : IEditorFactory<TextEditSettings>
+    public class LabelTextEditFactory : IEditorFactory
     {
 
         public DependencyProperty EditProperty
@@ -35,7 +35,7 @@ namespace TgFramework.Samples.Simple
             get { return Label.ContentProperty; }
         }
 
-        public UIElement CreateElement(EditSettingsBase settings)
+        public UIElement CreateElement(EditFieldBase field)
         {
             return new Label()
             {

@@ -10,11 +10,11 @@ using TgFramework.Data;
 
 namespace TgFramework.VisualModel
 {
-    public class EditField : DependencyObject
+    public abstract class EditFieldBase : DependencyObject
     {
         #region Private Members
 
-        private EditSettingsBase _EditSettings;
+        private IEditorFactory _factory;
 
         private Binding _Binding;
 
@@ -30,18 +30,29 @@ namespace TgFramework.VisualModel
 
         public event ValueChangedEventHandler ValueChanged;
 
-        public event EventHandler EditSettingsChanged;
-
         #endregion
 
         #region Dependency Properties
 
         public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(EditField), new PropertyMetadata(null));
+            DependencyProperty.Register("Title", typeof(string), typeof(EditFieldBase), new PropertyMetadata(null));
 
         #endregion
 
         #region Properties
+
+        private IEditorFactory Factory
+        {
+            get
+            {
+                if (_factory == null)
+                {
+                    _factory = EditorFactory.Instance.GetEditorFactory(this);
+                }
+
+                return _factory;
+            }
+        }
 
         public Binding Binding
         {
@@ -82,10 +93,7 @@ namespace TgFramework.VisualModel
             {
                 if (_Editor == null)
                 {
-                    if (_EditSettings != null)
-                    {
-                        _Editor = _EditSettings.CreateElement();
-                    }
+                    _Editor = this.CreateElement();
                 }
 
                 return _Editor;
@@ -101,30 +109,6 @@ namespace TgFramework.VisualModel
         {
             get { return (string)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
-        }
-
-        public EditSettingsBase EditSettings
-        {
-            get
-            {
-                if (_EditSettings == null)
-                {
-                    EditSettings = EditorFactory.Instance.CreateDefaultEditSettings();
-                }
-
-                return _EditSettings;
-            }
-            set
-            {
-                _EditSettings = value;
-                if (_EditSettings != null)
-                {
-                    _EditSettings.EditField = this;
-                    RefreshEditor();
-                }
-
-                CoreFrameworkExtensions.Invoke(this.EditSettingsChanged, this, EventArgs.Empty);
-            }
         }
 
         #endregion
@@ -158,15 +142,15 @@ namespace TgFramework.VisualModel
 
         public void RefreshBinding()
         {
-            if (EditSettings != null && Editor != null && Binding != null)
+            if (Editor != null && Binding != null)
             {
-                EditSettings.AttachBinding(Editor, Binding);
+                this.AttachBinding(Editor, Binding);
             }
         }
 
         public void RefreshEditor()
         {
-            this.Editor = EditSettings.CreateElement();
+            this.Editor = this.CreateElement();
 
             if (this.Editor != null)
             {
@@ -175,33 +159,24 @@ namespace TgFramework.VisualModel
             }
         }
 
-        #endregion
-    }
-
-    public class EditField<T> : EditField
-        where T : EditSettingsBase, new()
-    {
-        #region Properties
-
-        public new T EditSettings
+        public void AttachBinding(UIElement element, Binding binding)
         {
-            get
+            if (element == null)
             {
-                return base.EditSettings as T;
+                throw new ArgumentNullException("element");
             }
-            set
+
+            if (binding == null)
             {
-                base.EditSettings = value;
+                throw new ArgumentNullException("binding");
             }
+
+            BindingOperations.SetBinding(element, Factory.EditProperty, binding);
         }
 
-        #endregion
-
-        #region Constructors
-
-        public EditField()
+        public UIElement CreateElement()
         {
-            this.EditSettings = new T();
+            return Factory.CreateElement(this);
         }
 
         #endregion

@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace TgFramework.VisualModel.Editors
 {
-    public class ButtonFactory : IEditorFactory<ButtonSettings>
+    public class ButtonFactory : IEditorFactory<ButtonField>
     {
         #region IEditorFactory Interface Implementation
 
@@ -17,11 +17,11 @@ namespace TgFramework.VisualModel.Editors
             get { return Button.CommandProperty; }
         }
 
-        public System.Windows.UIElement CreateElement(EditSettingsBase settings)
+        public System.Windows.UIElement CreateElement(EditFieldBase field)
         {
             var button = new Button();
 
-            button.SetBinding(Button.ContentProperty, new Binding("Content") { Source = settings.EditField });
+            button.SetBinding(Button.ContentProperty, new Binding("Content") { Source = field });
 
             return button;
         }

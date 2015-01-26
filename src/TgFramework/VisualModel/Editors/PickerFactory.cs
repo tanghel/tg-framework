@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace TgFramework.VisualModel.Editors
 {
-    public class PickerFactory : IEditorFactory<PickerEditSettings>
+    public class PickerFactory : IEditorFactory<PickerField>
     {
         #region IEditorFactory Interface Implementation
 
@@ -17,19 +17,19 @@ namespace TgFramework.VisualModel.Editors
             get { return ComboBox.SelectedValueProperty; }
         }
 
-        public System.Windows.UIElement CreateElement(EditSettingsBase settings)
+        public System.Windows.UIElement CreateElement(EditFieldBase field)
         {
-            var pickerSettings = settings as PickerEditSettings;
-            if (pickerSettings == null)
+            var pickerField = field as PickerField;
+            if (pickerField == null)
             {
-                throw new ArgumentException("settings is not of type PickerEditSettings");
+                throw new ArgumentException("field is not of type PickerField");
             }
 
             return new ComboBox()
             {
                 DisplayMemberPath = "Title",
                 SelectedValuePath = "Id",
-                ItemsSource = pickerSettings.Items,
+                ItemsSource = pickerField.Items,
             };
         }
 

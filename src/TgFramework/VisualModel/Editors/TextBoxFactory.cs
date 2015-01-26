@@ -8,7 +8,7 @@ using System.Windows.Data;
 
 namespace TgFramework.VisualModel.Editors
 {
-    public class TextBoxFactory : IEditorFactory<TextEditSettings>
+    public class TextBoxFactory : IEditorFactory<TextField>
     {
         #region IEditorFactory Interface Implementation
 
@@ -17,7 +17,7 @@ namespace TgFramework.VisualModel.Editors
             get { return TextBox.TextProperty; }
         }
 
-        public System.Windows.UIElement CreateElement(EditSettingsBase settings)
+        public System.Windows.UIElement CreateElement(EditFieldBase field)
         {
             return new TextBox();
         }

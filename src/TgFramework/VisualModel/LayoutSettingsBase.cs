@@ -41,7 +41,7 @@ namespace TgFramework.VisualModel
             return Factory.CreateLayout(this);
         }
 
-        public void RefreshLayout(EditField[] fields)
+        public void RefreshLayout(EditFieldBase[] fields)
         {
             if (fields == null)
             {

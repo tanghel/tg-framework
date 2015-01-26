@@ -11,11 +11,11 @@ namespace TgFramework.VisualModel
     {
         DependencyProperty EditProperty { get; }
 
-        UIElement CreateElement(EditSettingsBase settings);
+        UIElement CreateElement(EditFieldBase field);
     }
 
     public interface IEditorFactory<T> : IEditorFactory
-        where T : EditSettingsBase
+        where T : EditFieldBase
     {
     }
 }

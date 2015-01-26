@@ -9,7 +9,7 @@
                 <tg:GroupBoxLayoutSettings />
             </tg:PropertyContainer.LayoutSettings>
             <tg:PropertyContainer.Fields>
-                <tg:EditField Title="First Name:" Binding="{Binding FirstName}" />
+                <tg:TextField Title="First Name:" Binding="{Binding FirstName}" />
                 <tg:TextField Title="Last Name:" FieldName="LastName" />
                 <tg:TextField Title="Address:" FieldName="Address" />
                 <tg:PickerField Title="Gender:" FieldName="Gender">

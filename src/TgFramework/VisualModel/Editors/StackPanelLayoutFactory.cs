@@ -17,7 +17,7 @@ namespace TgFramework.VisualModel.Editors
             return StackPanel = new StackPanel();
         }
 
-        public void RefreshLayout(EditField[] fields)
+        public void RefreshLayout(EditFieldBase[] fields)
         {
             if (fields == null)
             {

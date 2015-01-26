@@ -61,7 +61,7 @@ namespace TgFramework.VisualModel.Editors
             return this.GroupBox;   
         }
 
-        public void RefreshLayout(EditField[] fields)
+        public void RefreshLayout(EditFieldBase[] fields)
         {
             if (fields == null)
             {
@@ -87,17 +87,17 @@ namespace TgFramework.VisualModel.Editors
 
         #region Methods
 
-        public void CreateField(EditField field)
+        public void CreateField(EditFieldBase field)
         {
             if (field == null)
             {
                 throw new ArgumentNullException("field");
             }
 
-            if (field.EditSettings == null)
-            {
-                throw new ArgumentException("field.EditSetttings cannot be null.");
-            }
+            //if (field.EditSettings == null)
+            //{
+            //    throw new ArgumentException("field.EditSetttings cannot be null.");
+            //}
 
             var contentBinding = new Binding("Title")
                 {

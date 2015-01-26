@@ -7,20 +7,19 @@ using System.Threading.Tasks;
 
 namespace TgFramework.VisualModel.Editors
 {
-    public class PickerField : EditField<PickerEditSettings>
+    public class PickerField : EditFieldBase
     {
         #region Properties
 
-        public ObservableCollection<PickerItem> Items
+        public ObservableCollection<PickerItem> Items { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        public PickerField()
         {
-            get
-            {
-                return this.EditSettings.Items;
-            }
-            set
-            {
-                this.EditSettings.Items = value;
-            }
+            this.Items = new ObservableCollection<PickerItem>();
         }
 
         #endregion
