@@ -67,7 +67,6 @@ namespace TgFramework.Samples.Simple
 
         [Display(Description = "Birth date")]
         public DateTime Birthdate { get; set; }
-
     }
 
     /// <summary>
@@ -130,17 +129,6 @@ namespace TgFramework.Samples.Simple
             };
 
             this.DataContext = this;
-
-            this.Loaded += MainWindow_Loaded;
-        }
-
-        void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            foreach (var field in propertyContainer.Fields)
-            {
-                field.Validating += (s, args) => args.Result = true;
-                field.ValueChanged += (s, args) => MessageBox.Show("Value changed to: ", args.Value.ToStringNN());
-            }
         }
     }
 }

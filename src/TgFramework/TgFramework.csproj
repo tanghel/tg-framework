@@ -51,10 +51,6 @@
   <ItemGroup>
     <Compile Include="Controls\GridDefinitionsParser.cs" />
     <Compile Include="Controls\WrapGrid.cs" />
-    <Compile Include="Data\CancellableBinding.cs" />
-    <Compile Include="Data\CancellableValidationRule.cs" />
-    <Compile Include="Data\ValidatingHandler.cs" />
-    <Compile Include="Data\ValidationExtensions.cs" />
     <Compile Include="Exceptions\GridDefinitionParseException.cs" />
     <Compile Include="FrameworkExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

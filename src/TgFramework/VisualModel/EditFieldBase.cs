@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using TgFramework.Core;
-using TgFramework.Data;
 
 namespace TgFramework.VisualModel
 {
@@ -15,20 +14,9 @@ namespace TgFramework.VisualModel
         #region Private Members
 
         private IEditorFactory _factory;
-
-        private Binding _Binding;
-
-        private string _FieldName;
-
-        private UIElement _Editor;
-
-        #endregion
-
-        #region Events
-
-        public event ValidatingEventHandler Validating;
-
-        public event ValueChangedEventHandler ValueChanged;
+        private Binding _binding;
+        private string _fieldName;
+        private UIElement _editor;
 
         #endregion
 
@@ -58,14 +46,13 @@ namespace TgFramework.VisualModel
         {
             get
             {
-                return _Binding;
+                return _binding;
             }
             set
             {
-                _Binding = value;
-                if (_Binding != null)
+                _binding = value;
+                if (_binding != null)
                 {
-                    _Binding.ValidationRules.Add(new CancellableValidationRule());
                     RefreshBinding();
                 }
             }
@@ -75,11 +62,11 @@ namespace TgFramework.VisualModel
         {
             get
             {
-                return _FieldName;
+                return _fieldName;
             }
             set
             {
-                _FieldName = value;
+                _fieldName = value;
                 if (!string.IsNullOrEmpty(value))
                 {
                     this.Binding = new Binding(value);
@@ -91,16 +78,16 @@ namespace TgFramework.VisualModel
         {
             get
             {
-                if (_Editor == null)
+                if (_editor == null)
                 {
-                    _Editor = this.CreateElement();
+                    _editor = this.CreateElement();
                 }
 
-                return _Editor;
+                return _editor;
             }
             private set
             {
-                _Editor = value;
+                _editor = value;
                 RefreshBinding();
             }
         }
@@ -115,31 +102,6 @@ namespace TgFramework.VisualModel
 
         #region Methods
 
-        private bool? ValidatingHandler(UIElement element, object value)
-        {
-            if (this.Validating != null)
-            {
-                var args = new ValidatingEventArgs(value)
-                {
-                    Result = true,
-                };
-
-                this.Validating(this, args);
-
-                return args.Result;
-            }
-
-            return true;
-        }
-
-        private void ValueChangedHandler(UIElement element, object value)
-        {
-            if (this.ValueChanged != null)
-            {
-                this.ValueChanged(element, new ValueChangedEventArgs(value));
-            }
-        }
-
         public void RefreshBinding()
         {
             if (Editor != null && Binding != null)
@@ -151,12 +113,6 @@ namespace TgFramework.VisualModel
         public void RefreshEditor()
         {
             this.Editor = this.CreateElement();
-
-            if (this.Editor != null)
-            {
-                this.Editor.SetValidatingAction(ValidatingHandler);
-                this.Editor.SetValueChangedAction(ValueChangedHandler);
-            }
         }
 
         public void AttachBinding(UIElement element, Binding binding)
