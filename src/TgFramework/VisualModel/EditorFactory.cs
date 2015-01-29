@@ -2,6 +2,7 @@
 using SimpleInjector;
 using TgFramework.VisualModel.API;
 using TgFramework.VisualModel.Editors;
+using TgFramework.VisualModel.Layout;
 
 namespace TgFramework.VisualModel
 {

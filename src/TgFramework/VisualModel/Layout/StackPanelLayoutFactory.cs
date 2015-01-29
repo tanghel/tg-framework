@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using TgFramework.VisualModel.API;
 
-namespace TgFramework.VisualModel.Editors
+namespace TgFramework.VisualModel.Layout
 {
     public class StackPanelLayoutFactory : ILayoutFactory<StackPanelLayoutSettings>
     {

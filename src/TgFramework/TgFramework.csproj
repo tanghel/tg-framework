@@ -58,14 +58,14 @@
     <Compile Include="VisualModel\EditorFactory.cs" />
     <Compile Include="VisualModel\Editors\ButtonFactory.cs" />
     <Compile Include="VisualModel\Editors\ButtonField.cs" />
-    <Compile Include="VisualModel\Editors\GroupBoxLayoutFactory.cs" />
-    <Compile Include="VisualModel\Editors\GroupBoxLayoutSettings.cs" />
+    <Compile Include="VisualModel\Layout\GroupBoxLayoutFactory.cs" />
+    <Compile Include="VisualModel\Layout\GroupBoxLayoutSettings.cs" />
     <Compile Include="VisualModel\Editors\LabelFactory.cs" />
     <Compile Include="VisualModel\Editors\PickerFactory.cs" />
     <Compile Include="VisualModel\Editors\PickerField.cs" />
     <Compile Include="VisualModel\Editors\PickerItem.cs" />
-    <Compile Include="VisualModel\Editors\StackPanelLayoutFactory.cs" />
-    <Compile Include="VisualModel\Editors\StackPanelLayoutSettings.cs" />
+    <Compile Include="VisualModel\Layout\StackPanelLayoutFactory.cs" />
+    <Compile Include="VisualModel\Layout\StackPanelLayoutSettings.cs" />
     <Compile Include="VisualModel\Editors\TextBoxFactory.cs" />
     <Compile Include="VisualModel\Editors\TextField.cs" />
     <Compile Include="VisualModel\API\IEditorFactory.cs" />
@@ -82,10 +82,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="VisualModel\EditorFactories\" />
-    <Folder Include="VisualModel\EditorFields\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

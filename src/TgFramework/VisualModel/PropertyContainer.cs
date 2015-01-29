@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using TgFramework.Controls;
+using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel
 {
@@ -129,7 +122,7 @@ namespace TgFramework.VisualModel
             this.RefreshLayout();
         }
 
-        private void Fields_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Fields_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (this.IsLoaded)
             {

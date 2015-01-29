@@ -17,6 +17,7 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://tgframework/", "TgFramework.Controls")]
 [assembly: XmlnsDefinition("http://tgframework/", "TgFramework.VisualModel")]
 [assembly: XmlnsDefinition("http://tgframework/", "TgFramework.VisualModel.Editors")]
+[assembly: XmlnsDefinition("http://tgframework/", "TgFramework.VisualModel.Layout")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 

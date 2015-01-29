@@ -5,7 +5,7 @@ using System.Windows.Data;
 using TgFramework.Controls;
 using TgFramework.VisualModel.API;
 
-namespace TgFramework.VisualModel.Editors
+namespace TgFramework.VisualModel.Layout
 {
     public class GroupBoxLayoutFactory : ILayoutFactory<GroupBoxLayoutSettings>
     {

@@ -2,11 +2,12 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:tg="http://tgframework/"
+        xmlns:layout="clr-namespace:TgFramework.VisualModel.Layout;assembly=TgFramework"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <tg:PropertyContainer x:Name="propertyContainer" Header="Customer" DataContext="{Binding EditValue}">
             <tg:PropertyContainer.LayoutSettings>
-                <tg:GroupBoxLayoutSettings />
+                <layout:GroupBoxLayoutSettings />
             </tg:PropertyContainer.LayoutSettings>
             <tg:PropertyContainer.Fields>
                 <tg:TextField Title="First Name:" Binding="{Binding FirstName}" />
