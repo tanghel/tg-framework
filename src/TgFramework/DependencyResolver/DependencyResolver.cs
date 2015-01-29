@@ -10,6 +10,7 @@ namespace TgFramework
 
         private DependencyResolver()
         {
+            SetResolver(new SimpleInjectorResolver());
         }
 
         public static DependencyResolver Current

@@ -9,7 +9,7 @@ namespace TgFramework.VisualModel.API
         #region Dependency Properties
 
         public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof (string), typeof (FieldBase), new PropertyMetadata(null));
+            DependencyProperty.Register("Title", typeof(string), typeof(FieldBase), new PropertyMetadata(null));
 
         #endregion
 
@@ -35,6 +35,11 @@ namespace TgFramework.VisualModel.API
 
                 return _factory;
             }
+        }
+
+        public DependencyProperty EditProperty
+        {
+            get { return Factory.EditProperty; }
         }
 
         public Binding Binding
@@ -65,25 +70,12 @@ namespace TgFramework.VisualModel.API
 
         public UIElement Editor
         {
-            get
-            {
-                if (_editor == null)
-                {
-                    _editor = CreateElement();
-                }
-
-                return _editor;
-            }
-            private set
-            {
-                _editor = value;
-                RefreshBinding();
-            }
+            get { return _editor ?? (_editor = CreateElement()); }
         }
 
         public string Title
         {
-            get { return (string) GetValue(TitleProperty); }
+            get { return (string)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
         }
 
@@ -99,22 +91,10 @@ namespace TgFramework.VisualModel.API
             }
         }
 
-        public void RefreshEditor()
-        {
-            Editor = CreateElement();
-        }
-
         public void AttachBinding(UIElement element, Binding binding)
         {
-            if (element == null)
-            {
-                throw new ArgumentNullException("element");
-            }
-
-            if (binding == null)
-            {
-                throw new ArgumentNullException("binding");
-            }
+            if (element == null) throw new ArgumentNullException("element");
+            if (binding == null) throw new ArgumentNullException("binding");
 
             BindingOperations.SetBinding(element, Factory.EditProperty, binding);
         }

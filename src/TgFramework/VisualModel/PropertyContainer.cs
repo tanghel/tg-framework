@@ -1,8 +1,16 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using TgFramework.Core;
+using TgFramework.Validation;
 using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel
@@ -12,7 +20,7 @@ namespace TgFramework.VisualModel
         #region Dependency Properties
 
         public static readonly DependencyProperty HeaderProperty =
-            DependencyProperty.Register("Header", typeof (string), typeof (PropertyContainer),
+            DependencyProperty.Register("Header", typeof(string), typeof(PropertyContainer),
                 new PropertyMetadata(null));
 
         #endregion
@@ -24,6 +32,7 @@ namespace TgFramework.VisualModel
             Fields = new ObservableCollection<FieldBase>();
 
             Loaded += PropertyContainer_Loaded;
+            DataContextChanged += OnDataContextChanged;
         }
 
         #endregion
@@ -87,7 +96,7 @@ namespace TgFramework.VisualModel
 
         public string Header
         {
-            get { return (string) GetValue(HeaderProperty); }
+            get { return (string)GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
 
@@ -111,9 +120,52 @@ namespace TgFramework.VisualModel
             }
         }
 
+        private void RefreshValidationRules(object dataContext)
+        {
+            if (dataContext != null)
+            {
+                foreach (var field in Fields.Where(x => x.Binding != null))
+                {
+                    var binding = field.Binding;
+                    SetValidationRules(binding, dataContext, field);
+                }
+            }
+        }
+
+        private static void SetValidationRules(Binding binding, object dataContext, FieldBase field)
+        {
+            if (binding == null) throw new ArgumentNullException("binding");
+            if (dataContext == null) throw new ArgumentNullException("dataContext");
+            if (field == null) throw new ArgumentNullException("field");
+
+            if (binding.Path != null && binding.Path.Path != null)
+            {
+                var propertyName = binding.Path.Path;
+                var dataContextType = dataContext.GetType();
+                var propertyInfo = dataContextType.GetProperty(propertyName);
+                if (propertyInfo == null)
+                {
+                    throw new InvalidOperationException("Property {0} not found on type {1}".FormatString(propertyName, dataContextType));
+                }
+
+                var validationRules = ValidationRulesExtractor.GetValidationRules(propertyInfo, dataContext);
+
+                binding.ValidationRules.Clear();
+                foreach (var rule in validationRules)
+                {
+                    binding.ValidationRules.Add(rule);
+                }
+            }
+        }
+        
         #endregion
 
         #region Event Handlers
+
+        private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs args)
+        {
+            RefreshValidationRules(args.NewValue);
+        }
 
         private void PropertyContainer_Loaded(object sender, RoutedEventArgs e)
         {

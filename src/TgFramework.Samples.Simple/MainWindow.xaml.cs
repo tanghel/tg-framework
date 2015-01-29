@@ -34,9 +34,11 @@ namespace TgFramework.Samples.Simple
     public class MyEntity
     {
         [Display(Description = "First Name")]
+        [Required]
         public string FirstName { get; set; }
 
         [Display(Description = "Last Name")]
+        [Required]
         public string LastName { get; set; }
 
         public string Address { get; set; }

@@ -9,7 +9,6 @@ namespace TgFramework.Samples.Simple
     {
         public App()
         {
-            DependencyResolver.SetResolver(new SimpleInjectorResolver());
         }
     }
 }
