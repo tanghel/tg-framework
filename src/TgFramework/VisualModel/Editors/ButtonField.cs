@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Data;
+﻿using System.Windows;
+using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel.Editors
 {
-    public class ButtonField : EditFieldBase
+    public class ButtonField : FieldBase
     {
         #region Dependency Properties
 

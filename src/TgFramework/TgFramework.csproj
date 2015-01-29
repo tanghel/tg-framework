@@ -54,7 +54,7 @@
     <Compile Include="Exceptions\GridDefinitionParseException.cs" />
     <Compile Include="FrameworkExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VisualModel\EditFieldBase.cs" />
+    <Compile Include="VisualModel\API\FieldBase.cs" />
     <Compile Include="VisualModel\EditorFactory.cs" />
     <Compile Include="VisualModel\Editors\ButtonFactory.cs" />
     <Compile Include="VisualModel\Editors\ButtonField.cs" />
@@ -68,9 +68,9 @@
     <Compile Include="VisualModel\Editors\StackPanelLayoutSettings.cs" />
     <Compile Include="VisualModel\Editors\TextBoxFactory.cs" />
     <Compile Include="VisualModel\Editors\TextField.cs" />
-    <Compile Include="VisualModel\IEditorFactory.cs" />
-    <Compile Include="VisualModel\ILayoutFactory.cs" />
-    <Compile Include="VisualModel\LayoutSettingsBase.cs" />
+    <Compile Include="VisualModel\API\IEditorFactory.cs" />
+    <Compile Include="VisualModel\API\ILayoutFactory.cs" />
+    <Compile Include="VisualModel\API\LayoutSettingsBase.cs" />
     <Compile Include="VisualModel\PropertyContainer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +81,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="VisualModel\EditorFactories\" />
+    <Folder Include="VisualModel\EditorFields\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

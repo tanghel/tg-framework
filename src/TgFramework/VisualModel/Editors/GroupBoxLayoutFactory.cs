@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using TgFramework.Controls;
-using TgFramework.Core;
+using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel.Editors
 {
@@ -23,7 +19,7 @@ namespace TgFramework.VisualModel.Editors
 
         #region ILayoutFactory Interface Implementation
 
-        public System.Windows.UIElement CreateLayout(LayoutSettingsBase settings)
+        public UIElement CreateLayout(LayoutSettingsBase settings)
         {
             if (settings == null)
             {
@@ -61,7 +57,7 @@ namespace TgFramework.VisualModel.Editors
             return this.GroupBox;   
         }
 
-        public void RefreshLayout(EditFieldBase[] fields)
+        public void RefreshLayout(FieldBase[] fields)
         {
             if (fields == null)
             {
@@ -87,7 +83,7 @@ namespace TgFramework.VisualModel.Editors
 
         #region Methods
 
-        public void CreateField(EditFieldBase field)
+        public void CreateField(FieldBase field)
         {
             if (field == null)
             {

@@ -1,22 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using TgFramework.VisualModel;
-using TgFramework.VisualModel.Editors;
-using TgFramework.Core;
+using TgFramework.VisualModel.API;
 
 namespace TgFramework.Samples.Simple
 {
@@ -26,16 +14,14 @@ namespace TgFramework.Samples.Simple
         Female = 2
     }
 
-
     public class LabelTextEditFactory : IEditorFactory
     {
-
         public DependencyProperty EditProperty
         {
             get { return Label.ContentProperty; }
         }
 
-        public UIElement CreateElement(EditFieldBase field)
+        public UIElement CreateElement(FieldBase field)
         {
             return new Label()
             {
@@ -95,18 +81,18 @@ namespace TgFramework.Samples.Simple
 
         #endregion
 
-        private MyEntity _EditValue;
+        private MyEntity _editValue;
 
         public MyEntity EditValue
         {
             get
             {
-                return _EditValue;
+                return _editValue;
             }
             set
             {
-                _EditValue = value;
-                this.OnPropertyChanged("EditValue");
+                _editValue = value;
+                OnPropertyChanged("EditValue");
             }
         }
 
@@ -117,7 +103,7 @@ namespace TgFramework.Samples.Simple
 
             InitializeComponent();
 
-            this.EditValue = new MyEntity()
+            EditValue = new MyEntity()
             {
                 FirstName = "Andreea",
                 LastName = "Patatu",
@@ -128,7 +114,7 @@ namespace TgFramework.Samples.Simple
                 Birthdate = new DateTime(1989, 2, 16)
             };
 
-            this.DataContext = this;
+            DataContext = this;
         }
     }
 }

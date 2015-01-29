@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel.Editors
 {
-    public class PickerField : EditFieldBase
+    public class PickerField : FieldBase
     {
         #region Properties
 

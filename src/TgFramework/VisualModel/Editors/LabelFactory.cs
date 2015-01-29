@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 using System.Windows.Controls;
+using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel.Editors
 {
-    public class LabelFactory : IEditorFactory<EditFieldBase>
+    public class LabelFactory : IEditorFactory<FieldBase>
     {
-        public System.Windows.DependencyProperty EditProperty
+        public DependencyProperty EditProperty
         {
             get { return Label.ContentProperty; }
         }
 
-        public System.Windows.UIElement CreateElement(EditFieldBase field)
+        public UIElement CreateElement(FieldBase field)
         {
             return new Label();
         }

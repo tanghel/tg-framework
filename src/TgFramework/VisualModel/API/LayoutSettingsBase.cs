@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
-namespace TgFramework.VisualModel
+namespace TgFramework.VisualModel.API
 {
     public abstract class LayoutSettingsBase
     {
@@ -41,7 +37,7 @@ namespace TgFramework.VisualModel
             return Factory.CreateLayout(this);
         }
 
-        public void RefreshLayout(EditFieldBase[] fields)
+        public void RefreshLayout(FieldBase[] fields)
         {
             if (fields == null)
             {

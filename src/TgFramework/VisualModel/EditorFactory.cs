@@ -1,9 +1,6 @@
-﻿using SimpleInjector;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using SimpleInjector;
+using TgFramework.VisualModel.API;
 using TgFramework.VisualModel.Editors;
 
 namespace TgFramework.VisualModel
@@ -57,9 +54,9 @@ namespace TgFramework.VisualModel
         }
 
         public void RegisterDefaultEditField<T>()
-            where T : EditFieldBase
+            where T : FieldBase
         {
-            container.Register<EditFieldBase, T>();
+            container.Register<FieldBase, T>();
         }
 
         public LayoutSettingsBase CreateDefaultLayoutSettings()
@@ -67,13 +64,13 @@ namespace TgFramework.VisualModel
             return container.GetInstance<LayoutSettingsBase>();
         }
 
-        public EditFieldBase CreateDefaultEditField()
+        public FieldBase CreateDefaultEditField()
         {
-            return container.GetInstance<EditFieldBase>();
+            return container.GetInstance<FieldBase>();
         }
 
         public void RegisterEditor<TService, TImplementation>()
-            where TService : EditFieldBase
+            where TService : FieldBase
             where TImplementation : class, IEditorFactory<TService>
         {
             container.Register<IEditorFactory<TService>, TImplementation>();
@@ -86,7 +83,7 @@ namespace TgFramework.VisualModel
             container.Register<ILayoutFactory<TService>, TImplementation>();
         }
 
-        internal IEditorFactory GetEditorFactory(EditFieldBase field)
+        internal IEditorFactory GetEditorFactory(FieldBase field)
         {
             if (field == null)
             {

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel.Editors
 {
@@ -12,12 +9,12 @@ namespace TgFramework.VisualModel.Editors
     {
         public StackPanel StackPanel { get; set; }
 
-        public System.Windows.UIElement CreateLayout(LayoutSettingsBase settings)
+        public UIElement CreateLayout(LayoutSettingsBase settings)
         {
             return StackPanel = new StackPanel();
         }
 
-        public void RefreshLayout(EditFieldBase[] fields)
+        public void RefreshLayout(FieldBase[] fields)
         {
             if (fields == null)
             {

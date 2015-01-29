@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
+using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel.Editors
 {
@@ -12,12 +9,12 @@ namespace TgFramework.VisualModel.Editors
     {
         #region IEditorFactory Interface Implementation
 
-        public System.Windows.DependencyProperty EditProperty
+        public DependencyProperty EditProperty
         {
             get { return ComboBox.SelectedValueProperty; }
         }
 
-        public System.Windows.UIElement CreateElement(EditFieldBase field)
+        public UIElement CreateElement(FieldBase field)
         {
             var pickerField = field as PickerField;
             if (pickerField == null)

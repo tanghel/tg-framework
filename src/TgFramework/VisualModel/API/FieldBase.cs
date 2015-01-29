@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
-using TgFramework.Core;
 
-namespace TgFramework.VisualModel
+namespace TgFramework.VisualModel.API
 {
-    public abstract class EditFieldBase : DependencyObject
+    public abstract class FieldBase : DependencyObject
     {
         #region Private Members
 
@@ -23,7 +18,7 @@ namespace TgFramework.VisualModel
         #region Dependency Properties
 
         public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(EditFieldBase), new PropertyMetadata(null));
+            DependencyProperty.Register("Title", typeof(string), typeof(FieldBase), new PropertyMetadata(null));
 
         #endregion
 

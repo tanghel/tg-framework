@@ -18,7 +18,7 @@ namespace TgFramework.VisualModel
     {
         #region Private Members
 
-        private ObservableCollection<EditFieldBase> _fields;
+        private ObservableCollection<FieldBase> _fields;
 
         private LayoutSettingsBase _layoutSettings;
 
@@ -61,7 +61,7 @@ namespace TgFramework.VisualModel
             }
         }
 
-        public ObservableCollection<EditFieldBase> Fields
+        public ObservableCollection<FieldBase> Fields
         {
             get
             {
@@ -115,7 +115,7 @@ namespace TgFramework.VisualModel
 
         public PropertyContainer()
         {
-            this.Fields = new ObservableCollection<EditFieldBase>();
+            this.Fields = new ObservableCollection<FieldBase>();
 
             this.Loaded += PropertyContainer_Loaded;
         }
