@@ -8,39 +8,27 @@ namespace TgFramework.VisualModel
 {
     public class EditorFactory
     {
-        #region Private Members
-
-        private readonly Container container = new Container();
-
-        #endregion
-
         #region Ioc container implementation
 
-        private EditorFactory()
-        {
-            container.Options.AllowOverridingRegistrations = true;
-        }
-
-        private static EditorFactory _Instance;
-
+        private static EditorFactory instance;
         public static EditorFactory Instance
         {
             get
             {
-                if (_Instance == null)
+                if (instance == null)
                 {
-                    _Instance = new EditorFactory();
+                    instance = new EditorFactory();
 
-                    _Instance.RegisterEditor<TextField, TextBoxFactory>();
-                    _Instance.RegisterEditor<PickerField, PickerFactory>();
-                    _Instance.RegisterEditor<ButtonField, ButtonFactory>();
+                    instance.RegisterEditor<TextField, TextBoxFactory>();
+                    instance.RegisterEditor<PickerField, PickerFactory>();
+                    instance.RegisterEditor<ButtonField, ButtonFactory>();
 
-                    _Instance.RegisterDefaultLayoutSettings<GroupBoxLayoutSettings>();
-                    _Instance.RegisterLayout<StackPanelLayoutSettings, StackPanelLayoutFactory>();
-                    _Instance.RegisterLayout<GroupBoxLayoutSettings, GroupBoxLayoutFactory>();
+                    instance.RegisterDefaultLayoutSettings<GroupBoxLayoutSettings>();
+                    instance.RegisterLayout<StackPanelLayoutSettings, StackPanelLayoutFactory>();
+                    instance.RegisterLayout<GroupBoxLayoutSettings, GroupBoxLayoutFactory>();
                 }
 
-                return _Instance;
+                return instance;
             }
         }
 
@@ -51,37 +39,37 @@ namespace TgFramework.VisualModel
         public void RegisterDefaultLayoutSettings<T>()
             where T : LayoutSettingsBase
         {
-            container.Register<LayoutSettingsBase, T>();
+            DependencyResolver.Current.RegisterType<LayoutSettingsBase, T>();
         }
 
         public void RegisterDefaultEditField<T>()
             where T : FieldBase
         {
-            container.Register<FieldBase, T>();
+            DependencyResolver.Current.RegisterType<FieldBase, T>();
         }
 
         public LayoutSettingsBase CreateDefaultLayoutSettings()
         {
-            return container.GetInstance<LayoutSettingsBase>();
+            return DependencyResolver.Current.Resolve<LayoutSettingsBase>();
         }
 
         public FieldBase CreateDefaultEditField()
         {
-            return container.GetInstance<FieldBase>();
+            return DependencyResolver.Current.Resolve<FieldBase>();
         }
 
         public void RegisterEditor<TService, TImplementation>()
             where TService : FieldBase
             where TImplementation : class, IEditorFactory<TService>
         {
-            container.Register<IEditorFactory<TService>, TImplementation>();
+            DependencyResolver.Current.RegisterType<IEditorFactory<TService>, TImplementation>();
         }
 
         public void RegisterLayout<TService, TImplementation>()
             where TService : LayoutSettingsBase
             where TImplementation : class, ILayoutFactory<TService>
         {
-            container.Register<ILayoutFactory<TService>, TImplementation>();
+            DependencyResolver.Current.RegisterType<ILayoutFactory<TService>, TImplementation>();
         }
 
         internal IEditorFactory GetEditorFactory(FieldBase field)
@@ -92,7 +80,7 @@ namespace TgFramework.VisualModel
             }
 
             var type = typeof(IEditorFactory<>).MakeGenericType(field.GetType());
-            var factory = container.GetInstance(type) as IEditorFactory;
+            var factory = DependencyResolver.Current.Resolve(type) as IEditorFactory;
 
             if (factory == null)
             {
@@ -110,7 +98,7 @@ namespace TgFramework.VisualModel
             }
 
             var type = typeof(ILayoutFactory<>).MakeGenericType(settings.GetType());
-            var factory = container.GetInstance(type) as ILayoutFactory;
+            var factory = DependencyResolver.Current.Resolve(type) as ILayoutFactory;
 
             if (factory == null)
             {

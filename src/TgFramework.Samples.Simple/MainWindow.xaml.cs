@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using TgFramework.VisualModel;
 using TgFramework.VisualModel.API;
 
 namespace TgFramework.Samples.Simple
@@ -98,9 +99,6 @@ namespace TgFramework.Samples.Simple
 
         public MainWindow()
         {
-            //EditorFactory.Instance.RegisterDefaultLayoutManager<StackPanelLayoutManager>();
-            //EditorFactory.Instance.RegisterEditor<TextEditSettings, LabelTextEditFactory>();
-
             InitializeComponent();
 
             EditValue = new MyEntity()
