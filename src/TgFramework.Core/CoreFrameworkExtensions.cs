@@ -29,7 +29,7 @@ namespace TgFramework.Core
         /// <param name="eventHandler">The event handler.</param>
         /// <param name="sender">The event sender.</param>
         /// <param name="args">The event arguments.</param>
-        public static void Invoke(this EventHandler eventHandler, object sender, EventArgs args)
+        public static void InvokeEvent(this EventHandler eventHandler, object sender, EventArgs args)
         {
             var handler = eventHandler;
             if (handler != null)
@@ -43,7 +43,7 @@ namespace TgFramework.Core
         /// <param name="eventHandler">The event handler.</param>
         /// <param name="sender">The event sender.</param>
         /// <param name="args">The event arguments.</param>
-        public static void Invoke<TArgs>(this EventHandler<TArgs> eventHandler, object sender, TArgs args) where TArgs : EventArgs
+        public static void InvokeEvent<TArgs>(this EventHandler<TArgs> eventHandler, object sender, TArgs args) where TArgs : EventArgs
         {
             var handler = eventHandler;
             if (handler != null)
