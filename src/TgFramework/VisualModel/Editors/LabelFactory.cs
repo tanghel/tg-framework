@@ -8,7 +8,7 @@ namespace TgFramework.VisualModel.Editors
     {
         public DependencyProperty EditProperty
         {
-            get { return Label.ContentProperty; }
+            get { return ContentControl.ContentProperty; }
         }
 
         public UIElement CreateElement(FieldBase field)

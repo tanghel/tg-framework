@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel.Editors
@@ -11,7 +12,7 @@ namespace TgFramework.VisualModel.Editors
 
         public DependencyProperty EditProperty
         {
-            get { return ComboBox.SelectedValueProperty; }
+            get { return Selector.SelectedValueProperty; }
         }
 
         public UIElement CreateElement(FieldBase field)
@@ -26,7 +27,7 @@ namespace TgFramework.VisualModel.Editors
             {
                 DisplayMemberPath = "Title",
                 SelectedValuePath = "Id",
-                ItemsSource = pickerField.Items,
+                ItemsSource = pickerField.Items
             };
         }
 

@@ -4,6 +4,5 @@ namespace TgFramework.VisualModel.Editors
 {
     public class TextField : FieldBase
     {
-
     }
 }

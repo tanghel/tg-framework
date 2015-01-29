@@ -8,7 +8,7 @@ namespace TgFramework.VisualModel.Editors
         #region Dependency Properties
 
         public static readonly DependencyProperty ContentProperty =
-            DependencyProperty.Register("Content", typeof(object), typeof(ButtonField), new PropertyMetadata(null));
+            DependencyProperty.Register("Content", typeof (object), typeof (ButtonField), new PropertyMetadata(null));
 
         #endregion
 
@@ -16,7 +16,7 @@ namespace TgFramework.VisualModel.Editors
 
         public object Content
         {
-            get { return (object)GetValue(ContentProperty); }
+            get { return GetValue(ContentProperty); }
             set { SetValue(ContentProperty, value); }
         }
 

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using TgFramework.Core;
@@ -48,7 +46,7 @@ namespace TgFramework.Controls
                 throw new GridDefinitionParseException(definition, "Could not extract value");
             }
 
-            return new GridLength((double)length, unitType);
+            return new GridLength((double) length, unitType);
         }
 
         private static Tuple<int, GridLength> GetGridLengths(string definition)
@@ -76,7 +74,7 @@ namespace TgFramework.Controls
                     throw new GridDefinitionParseException(definition, "Could not extract multiplier");
                 }
 
-                return new Tuple<int,GridLength>((int)multiplier, GetGridLength(right));
+                return new Tuple<int, GridLength>((int) multiplier, GetGridLength(right));
             }
 
             return new Tuple<int, GridLength>(1, GetGridLength(definition));
@@ -93,7 +91,7 @@ namespace TgFramework.Controls
             foreach (var definition in definitions)
             {
                 var multiplier = GetGridLengths(definition);
-                for (int i = 0; i < multiplier.Item1; i++)
+                for (var i = 0; i < multiplier.Item1; i++)
                 {
                     yield return multiplier.Item2;
                 }
@@ -115,7 +113,7 @@ namespace TgFramework.Controls
             grid.RowDefinitions.Clear();
             foreach (var gridLength in GetAllGridLengths(rows))
             {
-                grid.RowDefinitions.Add(new RowDefinition() { Height = gridLength });
+                grid.RowDefinitions.Add(new RowDefinition() {Height = gridLength});
             }
         }
 
@@ -134,7 +132,7 @@ namespace TgFramework.Controls
             grid.ColumnDefinitions.Clear();
             foreach (var gridLength in GetAllGridLengths(columns))
             {
-                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = gridLength });
+                grid.ColumnDefinitions.Add(new ColumnDefinition() {Width = gridLength});
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using SimpleInjector;
 using TgFramework.VisualModel.API;
 using TgFramework.VisualModel.Editors;
 using TgFramework.VisualModel.Layout;
@@ -11,6 +10,7 @@ namespace TgFramework.VisualModel
         #region Ioc container implementation
 
         private static EditorFactory instance;
+
         public static EditorFactory Instance
         {
             get
@@ -35,7 +35,7 @@ namespace TgFramework.VisualModel
         #endregion
 
         #region Public Methods
-        
+
         public void RegisterDefaultLayoutSettings<T>()
             where T : LayoutSettingsBase
         {
@@ -79,12 +79,12 @@ namespace TgFramework.VisualModel
                 throw new ArgumentNullException("field");
             }
 
-            var type = typeof(IEditorFactory<>).MakeGenericType(field.GetType());
+            var type = typeof (IEditorFactory<>).MakeGenericType(field.GetType());
             var factory = DependencyResolver.Current.Resolve(type) as IEditorFactory;
 
             if (factory == null)
             {
-                throw new InvalidOperationException("Could not create IEditorFactory of type " + field.GetType().ToString());
+                throw new InvalidOperationException("Could not create IEditorFactory of type " + field.GetType());
             }
 
             return factory;
@@ -97,12 +97,12 @@ namespace TgFramework.VisualModel
                 throw new ArgumentNullException("settings");
             }
 
-            var type = typeof(ILayoutFactory<>).MakeGenericType(settings.GetType());
+            var type = typeof (ILayoutFactory<>).MakeGenericType(settings.GetType());
             var factory = DependencyResolver.Current.Resolve(type) as ILayoutFactory;
 
             if (factory == null)
             {
-                throw new InvalidOperationException("Could not create ILayoutFactory of type " + settings.GetType().ToString());
+                throw new InvalidOperationException("Could not create ILayoutFactory of type " + settings.GetType());
             }
 
             return factory;

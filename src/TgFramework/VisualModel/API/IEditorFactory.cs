@@ -5,7 +5,6 @@ namespace TgFramework.VisualModel.API
     public interface IEditorFactory
     {
         DependencyProperty EditProperty { get; }
-
         UIElement CreateElement(FieldBase field);
     }
 

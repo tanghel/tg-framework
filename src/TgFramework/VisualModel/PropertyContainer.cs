@@ -9,18 +9,30 @@ namespace TgFramework.VisualModel
 {
     public class PropertyContainer : ContentControl
     {
+        #region Dependency Properties
+
+        public static readonly DependencyProperty HeaderProperty =
+            DependencyProperty.Register("Header", typeof (string), typeof (PropertyContainer),
+                new PropertyMetadata(null));
+
+        #endregion
+
+        #region Constructors
+
+        public PropertyContainer()
+        {
+            Fields = new ObservableCollection<FieldBase>();
+
+            Loaded += PropertyContainer_Loaded;
+        }
+
+        #endregion
+
         #region Private Members
 
         private ObservableCollection<FieldBase> _fields;
 
         private LayoutSettingsBase _layoutSettings;
-
-        #endregion
-
-        #region Dependency Properties
-
-        public static readonly DependencyProperty HeaderProperty =
-            DependencyProperty.Register("Header", typeof(string), typeof(PropertyContainer), new PropertyMetadata(null));
 
         #endregion
 
@@ -56,29 +68,26 @@ namespace TgFramework.VisualModel
 
         public ObservableCollection<FieldBase> Fields
         {
-            get
-            {
-                return _fields;
-            }
+            get { return _fields; }
             set
             {
-                if (this._fields != null)
+                if (_fields != null)
                 {
-                    this._fields.CollectionChanged -= Fields_CollectionChanged;
+                    _fields.CollectionChanged -= Fields_CollectionChanged;
                 }
 
                 _fields = value;
 
-                if (this._fields != null)
+                if (_fields != null)
                 {
-                    this._fields.CollectionChanged += Fields_CollectionChanged;
+                    _fields.CollectionChanged += Fields_CollectionChanged;
                 }
             }
         }
 
         public string Header
         {
-            get { return (string)GetValue(HeaderProperty); }
+            get { return (string) GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
 
@@ -90,7 +99,7 @@ namespace TgFramework.VisualModel
         {
             if (LayoutSettings != null)
             {
-                this.Content = LayoutSettings.CreateLayout();
+                Content = LayoutSettings.CreateLayout();
             }
         }
 
@@ -98,19 +107,8 @@ namespace TgFramework.VisualModel
         {
             if (LayoutSettings != null)
             {
-                LayoutSettings.RefreshLayout(this.Fields.ToArray());
+                LayoutSettings.RefreshLayout(Fields.ToArray());
             }
-        }
-
-        #endregion
-
-        #region Constructors
-
-        public PropertyContainer()
-        {
-            this.Fields = new ObservableCollection<FieldBase>();
-
-            this.Loaded += PropertyContainer_Loaded;
         }
 
         #endregion
@@ -119,14 +117,14 @@ namespace TgFramework.VisualModel
 
         private void PropertyContainer_Loaded(object sender, RoutedEventArgs e)
         {
-            this.RefreshLayout();
+            RefreshLayout();
         }
 
         private void Fields_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (this.IsLoaded)
+            if (IsLoaded)
             {
-                this.RefreshLayout();
+                RefreshLayout();
             }
         }
 

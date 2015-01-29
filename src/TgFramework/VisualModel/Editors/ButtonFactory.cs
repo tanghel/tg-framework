@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using TgFramework.VisualModel.API;
 
@@ -11,14 +12,14 @@ namespace TgFramework.VisualModel.Editors
 
         public DependencyProperty EditProperty
         {
-            get { return Button.CommandProperty; }
+            get { return ButtonBase.CommandProperty; }
         }
 
         public UIElement CreateElement(FieldBase field)
         {
             var button = new Button();
 
-            button.SetBinding(Button.ContentProperty, new Binding("Content") { Source = field });
+            button.SetBinding(ContentControl.ContentProperty, new Binding("Content") {Source = field});
 
             return button;
         }

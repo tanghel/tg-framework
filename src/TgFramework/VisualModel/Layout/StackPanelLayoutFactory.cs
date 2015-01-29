@@ -23,7 +23,8 @@ namespace TgFramework.VisualModel.Layout
 
             if (StackPanel == null)
             {
-                throw new InvalidOperationException("The content has not yet been created. Please call CreateLayout first.");
+                throw new InvalidOperationException(
+                    "The content has not yet been created. Please call CreateLayout first.");
             }
 
             StackPanel.Children.Clear();

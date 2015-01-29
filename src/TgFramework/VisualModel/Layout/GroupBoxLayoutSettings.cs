@@ -4,6 +4,5 @@ namespace TgFramework.VisualModel.Layout
 {
     public class GroupBoxLayoutSettings : LayoutSettingsBase
     {
-
     }
 }

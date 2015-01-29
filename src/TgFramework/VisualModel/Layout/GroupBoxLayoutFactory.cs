@@ -9,6 +9,41 @@ namespace TgFramework.VisualModel.Layout
 {
     public class GroupBoxLayoutFactory : ILayoutFactory<GroupBoxLayoutSettings>
     {
+        #region Methods
+
+        public void CreateField(FieldBase field)
+        {
+            if (field == null)
+            {
+                throw new ArgumentNullException("field");
+            }
+
+            //if (field.EditSettings == null)
+            //{
+            //    throw new ArgumentException("field.EditSetttings cannot be null.");
+            //}
+
+            var contentBinding = new Binding("Title")
+            {
+                Source = field
+            };
+
+            var label = new Label();
+            label.SetBinding(ContentControl.ContentProperty, contentBinding);
+
+            var editElement = field.Editor;
+            var frameworkElement = editElement as FrameworkElement;
+            if (frameworkElement != null)
+            {
+                frameworkElement.RemoveFromParent();
+            }
+
+            WrapGrid.Children.Add(label);
+            WrapGrid.Children.Add(editElement);
+        }
+
+        #endregion
+
         #region Properties
 
         public GroupBox GroupBox { get; set; }
@@ -37,24 +72,24 @@ namespace TgFramework.VisualModel.Layout
                 throw new ArgumentException("settings is not of type GroupBoxLayoutSettings");
             }
 
-            this.GroupBox = new GroupBox();
+            GroupBox = new GroupBox();
 
             var headerBinding = new Binding("Header")
             {
                 Source = settings.PropertyContainer
             };
 
-            this.GroupBox.SetBinding(GroupBox.HeaderProperty, headerBinding);
+            GroupBox.SetBinding(HeaderedContentControl.HeaderProperty, headerBinding);
 
-            this.WrapGrid = new WrapGrid()
+            WrapGrid = new WrapGrid()
             {
                 Rows = "Auto",
                 Columns = "Auto, *"
             };
 
-            this.GroupBox.Content = this.WrapGrid;
+            GroupBox.Content = WrapGrid;
 
-            return this.GroupBox;   
+            return GroupBox;
         }
 
         public void RefreshLayout(FieldBase[] fields)
@@ -66,7 +101,8 @@ namespace TgFramework.VisualModel.Layout
 
             if (WrapGrid == null)
             {
-                throw new InvalidOperationException("The content has not yet been created. Please call CreateLayout first.");
+                throw new InvalidOperationException(
+                    "The content has not yet been created. Please call CreateLayout first.");
             }
 
             WrapGrid.Children.Clear();
@@ -77,41 +113,6 @@ namespace TgFramework.VisualModel.Layout
                     CreateField(field);
                 }
             }
-        }
-
-        #endregion
-
-        #region Methods
-
-        public void CreateField(FieldBase field)
-        {
-            if (field == null)
-            {
-                throw new ArgumentNullException("field");
-            }
-
-            //if (field.EditSettings == null)
-            //{
-            //    throw new ArgumentException("field.EditSetttings cannot be null.");
-            //}
-
-            var contentBinding = new Binding("Title")
-                {
-                    Source = field
-                };
-            
-            var label = new Label();
-            label.SetBinding(Label.ContentProperty, contentBinding);
-
-            var editElement = field.Editor;
-            var frameworkElement = editElement as FrameworkElement;
-            if (frameworkElement != null)
-            {
-                frameworkElement.RemoveFromParent();
-            }
-
-            WrapGrid.Children.Add(label);
-            WrapGrid.Children.Add(editElement);
         }
 
         #endregion

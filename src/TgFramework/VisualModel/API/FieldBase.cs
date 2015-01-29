@@ -6,19 +6,19 @@ namespace TgFramework.VisualModel.API
 {
     public abstract class FieldBase : DependencyObject
     {
+        #region Dependency Properties
+
+        public static readonly DependencyProperty TitleProperty =
+            DependencyProperty.Register("Title", typeof (string), typeof (FieldBase), new PropertyMetadata(null));
+
+        #endregion
+
         #region Private Members
 
         private IEditorFactory _factory;
         private Binding _binding;
         private string _fieldName;
         private UIElement _editor;
-
-        #endregion
-
-        #region Dependency Properties
-
-        public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(FieldBase), new PropertyMetadata(null));
 
         #endregion
 
@@ -39,10 +39,7 @@ namespace TgFramework.VisualModel.API
 
         public Binding Binding
         {
-            get
-            {
-                return _binding;
-            }
+            get { return _binding; }
             set
             {
                 _binding = value;
@@ -55,16 +52,13 @@ namespace TgFramework.VisualModel.API
 
         public string FieldName
         {
-            get
-            {
-                return _fieldName;
-            }
+            get { return _fieldName; }
             set
             {
                 _fieldName = value;
                 if (!string.IsNullOrEmpty(value))
                 {
-                    this.Binding = new Binding(value);
+                    Binding = new Binding(value);
                 }
             }
         }
@@ -75,7 +69,7 @@ namespace TgFramework.VisualModel.API
             {
                 if (_editor == null)
                 {
-                    _editor = this.CreateElement();
+                    _editor = CreateElement();
                 }
 
                 return _editor;
@@ -89,7 +83,7 @@ namespace TgFramework.VisualModel.API
 
         public string Title
         {
-            get { return (string)GetValue(TitleProperty); }
+            get { return (string) GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
         }
 
@@ -101,13 +95,13 @@ namespace TgFramework.VisualModel.API
         {
             if (Editor != null && Binding != null)
             {
-                this.AttachBinding(Editor, Binding);
+                AttachBinding(Editor, Binding);
             }
         }
 
         public void RefreshEditor()
         {
-            this.Editor = this.CreateElement();
+            Editor = CreateElement();
         }
 
         public void AttachBinding(UIElement element, Binding binding)
