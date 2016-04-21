@@ -19,7 +19,7 @@ namespace TgFramework.VisualModel.Editors
         {
             var button = new Button();
 
-            button.SetBinding(ContentControl.ContentProperty, new Binding("Content") {Source = field});
+            button.SetBinding(ContentControl.ContentProperty, new Binding("Content") { Source = field });
 
             return button;
         }

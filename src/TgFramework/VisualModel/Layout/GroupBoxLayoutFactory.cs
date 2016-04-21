@@ -35,6 +35,7 @@ namespace TgFramework.VisualModel.Layout
             var frameworkElement = editElement as FrameworkElement;
             if (frameworkElement != null)
             {
+                frameworkElement.Margin = new Thickness(2);
                 frameworkElement.RemoveFromParent();
             }
 

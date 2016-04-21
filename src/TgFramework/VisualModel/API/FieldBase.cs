@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace TgFramework.VisualModel.API
 {
-    public abstract class FieldBase : DependencyObject
+    public abstract class FieldBase : FrameworkElement
     {
         #region Dependency Properties
 

@@ -19,9 +19,11 @@ namespace TgFramework.VisualModel
                 {
                     instance = new EditorFactory();
 
+                    instance.RegisterEditor<LabelField, LabelFactory>();
                     instance.RegisterEditor<TextField, TextBoxFactory>();
                     instance.RegisterEditor<PickerField, PickerFactory>();
                     instance.RegisterEditor<ButtonField, ButtonFactory>();
+                    instance.RegisterEditor<ProgressBarField, ProgressBarFactory>();
 
                     instance.RegisterDefaultLayoutSettings<GroupBoxLayoutSettings>();
                     instance.RegisterLayout<StackPanelLayoutSettings, StackPanelLayoutFactory>();

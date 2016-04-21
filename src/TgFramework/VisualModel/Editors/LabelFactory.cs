@@ -4,7 +4,7 @@ using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel.Editors
 {
-    public class LabelFactory : IEditorFactory<FieldBase>
+    public class LabelFactory : IEditorFactory<LabelField>
     {
         public DependencyProperty EditProperty
         {

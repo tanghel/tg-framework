@@ -9,12 +9,14 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Markup;
 using TgFramework.Core;
 using TgFramework.Validation;
 using TgFramework.VisualModel.API;
 
 namespace TgFramework.VisualModel
 {
+    [ContentProperty("Fields")]
     public class PropertyContainer : ContentControl
     {
         #region Dependency Properties
@@ -132,6 +134,14 @@ namespace TgFramework.VisualModel
             }
         }
 
+        private void RefreshDataContext(object dataContext)
+        {
+            foreach (var field in Fields.Where(x => x.Binding != null))
+            {
+                field.DataContext = dataContext;
+            }
+        }
+
         private static void SetValidationRules(Binding binding, object dataContext, FieldBase field)
         {
             if (binding == null) throw new ArgumentNullException("binding");
@@ -143,17 +153,15 @@ namespace TgFramework.VisualModel
                 var propertyName = binding.Path.Path;
                 var dataContextType = dataContext.GetType();
                 var propertyInfo = dataContextType.GetProperty(propertyName);
-                if (propertyInfo == null)
+                if (propertyInfo != null)
                 {
-                    throw new InvalidOperationException("Property {0} not found on type {1}".FormatString(propertyName, dataContextType));
-                }
+                    var validationRules = ValidationRulesExtractor.GetValidationRules(propertyInfo, dataContext);
 
-                var validationRules = ValidationRulesExtractor.GetValidationRules(propertyInfo, dataContext);
-
-                binding.ValidationRules.Clear();
-                foreach (var rule in validationRules)
-                {
-                    binding.ValidationRules.Add(rule);
+                    binding.ValidationRules.Clear();
+                    foreach (var rule in validationRules)
+                    {
+                        binding.ValidationRules.Add(rule);
+                    }
                 }
             }
         }
@@ -165,6 +173,7 @@ namespace TgFramework.VisualModel
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs args)
         {
             RefreshValidationRules(args.NewValue);
+            RefreshDataContext(args.NewValue);
         }
 
         private void PropertyContainer_Loaded(object sender, RoutedEventArgs e)
@@ -177,6 +186,14 @@ namespace TgFramework.VisualModel
             if (IsLoaded)
             {
                 RefreshLayout();
+            }
+
+            if (e.NewItems != null)
+            {
+                foreach (FieldBase field in e.NewItems)
+                {
+                    field.DataContext = this.DataContext;
+                }
             }
         }
 
