@@ -10,3 +10,4 @@
 /src/TgFramework/obj/Debug
 /src/packages
 *.suo
+/src/.vs/TgFramework/v15/Server/sqlite3

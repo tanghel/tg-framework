@@ -33,7 +33,7 @@ namespace TgFramework
             where T2 : class, T1
             where T1 : class
         {
-            _container.RegisterSingle<T1>(instance);
+            _container.Register<T1>(() => instance);
         }
     }
 }
